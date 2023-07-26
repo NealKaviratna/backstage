@@ -160,6 +160,3 @@ tsconfig.tmp.json
 # VS Code backing up svg files
 *svg.bkp
 *svg.dtmp
-
-# Gitpod remote dev machines
-.gitpod.*
