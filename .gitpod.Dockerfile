@@ -23,28 +23,11 @@ RUN sudo ./sam-installation/install
 RUN sudo apt-get -y install postgresql
 RUN brew install mysql@8.0
 
-# kubernetes
-RUN sudo apt-get update
-RUN sudo apt-get install -y apt-transport-https ca-certificates curl
-RUN sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-RUN echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-RUN sudo apt-get update
-RUN sudo apt-get install -y kubectl
-
 # cypress
 RUN echo "XKBMODEL='pc105' XKBLAYOUT='us' XKBVARIANT='' XKBOPTIONS='' BACKSPACE='guess'" > ./keyboard
 RUN sudo mv ./keyboard /etc/default/keyboard
 # RUN sudo apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xvfb xauth -y
 
-# terraform
-RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-RUN sudo apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-RUN sudo apt-get install terraform=1.1.5 -y
-
-# helm
-RUN curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-RUN chmod 700 get_helm.sh
-RUN ./get_helm.sh
 
 # node / yarn
 RUN sudo npm install -g n
